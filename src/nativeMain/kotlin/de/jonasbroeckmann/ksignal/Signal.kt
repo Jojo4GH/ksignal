@@ -13,18 +13,13 @@ private typealias PosixSignalHandler = CPointer<CFunction<(PosixSignal) -> Unit>
  * A signal based on POSIX.
  *
  * @param name the signal name
- * @param posix the POSIX signal number
+ * @param number the POSIX signal number
  */
 public actual class Signal(
     public actual val name: String,
-    private val posix: PosixSignal
+    internal val number: PosixSignal
 ) {
     override fun toString(): String = name
-
-    internal val requireSupportedPosix: PosixSignal get() {
-        require(posix != UnsupportedPosix) { "Signal $this is not supported on this platform" }
-        return posix
-    }
 
     public actual class Handler internal constructor(
         private val handler: (Signal) -> Unit
@@ -37,22 +32,19 @@ public actual class Signal(
     }
 
     public actual companion object : Signals() {
-        private const val UnsupportedPosix = -1
-        internal fun unsupported(name: String) = Signal(name, UnsupportedPosix)
-
-        internal val byPosix by lazy { Known.associateBy { it.posix } }
+        internal val byNumber by lazy { Known.associateBy { it.number } }
 
         internal val handlers = mutableMapOf<Signal, Handler>()
     }
 }
 
 private fun PosixSignal.toSignal(): Signal {
-    return Signal.byPosix[this] ?: error("Unknown signal: $this")
+    return Signal.byNumber[this] ?: error("Unknown signal: $this")
 }
 
 @OptIn(ExperimentalForeignApi::class)
 private fun PosixSignalHandler.toSignalHandler(): Signal.Handler {
-    return Signal.Handler { this.invoke(it.requireSupportedPosix) }
+    return Signal.Handler { this.invoke(it.number) }
 }
 
 private fun handlePosixSignal(posixSignal: PosixSignal) {
@@ -65,12 +57,12 @@ public actual fun Signal.handle(handler: Signal.Handler): Signal.Handler? {
     val oldHandler = Signal.handlers[this]
     Signal.handlers[this] = handler
     val oldPosixHandler = signal(
-        requireSupportedPosix,
+        number,
         staticCFunction<PosixSignal, Unit>(::handlePosixSignal)
     )
     return oldPosixHandler?.toSignalHandler() ?: oldHandler
 }
 
 public actual fun Signal.raise() {
-    raise(requireSupportedPosix)
+    raise(number)
 }
