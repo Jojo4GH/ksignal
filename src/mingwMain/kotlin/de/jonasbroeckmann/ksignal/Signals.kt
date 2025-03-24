@@ -4,6 +4,7 @@ package de.jonasbroeckmann.ksignal
 public actual abstract class Signals {
     public actual val ABRT: Signal = Signal("SIGABRT", platform.posix.SIGABRT)
     public actual val ALRM: Signal = Signal.unsupported("SIGALRM")
+    // TODO rework Signals to only specify supported signals
     public val BREAK: Signal = Signal("SIGBREAK", platform.posix.SIGBREAK)
     public actual val BUS: Signal = Signal.unsupported("SIGBUS")
     public actual val CLD: Signal = Signal.unsupported("SIGCLD")

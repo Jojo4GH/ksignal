@@ -37,4 +37,9 @@ public actual abstract class Signals {
     public actual val WINCH: Signal = Signal("SIGWINCH", platform.posix.SIGWINCH)
     public actual val XCPU: Signal = Signal("SIGXCPU", platform.posix.SIGXCPU)
     public actual val XFSZ: Signal = Signal("SIGXFSZ", platform.posix.SIGXFSZ)
+
+    internal actual val Known = listOf(
+        ABRT, ALRM, BUS, CLD, CHLD, CONT, FPE, HUP, ILL, INT, IO, IOT, KILL, PIPE, POLL, PROF, PWR, QUIT, SEGV,
+        STKFLT, STOP, SYS, TERM, TRAP, TSTP, TTIN, TTOU, UNUSED, URG, USR1, USR2, VTALRM, WINCH, XCPU, XFSZ
+    )
 }

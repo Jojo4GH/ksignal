@@ -1,8 +1,5 @@
 package de.jonasbroeckmann.ksignal
 
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-
 /**
  * Installs a signal handler for this signal.
  *
@@ -24,22 +21,6 @@ public inline fun <R> Signal.withHandler(handler: Signal.Handler, block: () -> R
     val oldHandler = handle(handler)
     try {
         return block()
-    } finally {
-        if (oldHandler != null) handle(oldHandler)
-    }
-}
-
-/**
- * Suspends until this signal is raised.
- *
- * @return the raised signal
- */
-public suspend fun Signal.await(): Signal {
-    var oldHandler: Signal.Handler? = null
-    try {
-        return suspendCoroutine<Signal> { continuation ->
-            oldHandler = handle(Signal.Handler { continuation.resume(it) })
-        }
     } finally {
         if (oldHandler != null) handle(oldHandler)
     }

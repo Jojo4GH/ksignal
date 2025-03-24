@@ -9,6 +9,12 @@ internal typealias PosixSignal = Int
 @OptIn(ExperimentalForeignApi::class)
 private typealias PosixSignalHandler = CPointer<CFunction<(PosixSignal) -> Unit>>
 
+/**
+ * A signal based on POSIX.
+ *
+ * @param name the signal name
+ * @param posix the POSIX signal number
+ */
 public actual class Signal(
     public actual val name: String,
     private val posix: PosixSignal
@@ -34,8 +40,7 @@ public actual class Signal(
         private const val UnsupportedPosix = -1
         internal fun unsupported(name: String) = Signal(name, UnsupportedPosix)
 
-        private val All by lazy { all() }
-        internal val byPosix by lazy { All.associateBy { it.posix } }
+        internal val byPosix by lazy { Known.associateBy { it.posix } }
 
         internal val handlers = mutableMapOf<Signal, Handler>()
     }
