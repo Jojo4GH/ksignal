@@ -2,39 +2,110 @@ package de.jonasbroeckmann.ksignal
 
 @Suppress("PropertyName", "VariableNaming")
 public actual abstract class Signals {
+    /** Abort signal */
     public actual val ABRT: Signal = Signal("SIGABRT", platform.posix.SIGABRT)
-    public actual val ALRM: Signal = Signal("SIGALRM", platform.posix.SIGALRM)
-    public actual val BUS: Signal = Signal("SIGBUS", platform.posix.SIGBUS)
-    public actual val CLD: Signal = Signal.unsupported("SIGCLD")
-    public actual val CHLD: Signal = Signal("SIGCHLD", platform.posix.SIGCHLD)
-    public actual val CONT: Signal = Signal("SIGCONT", platform.posix.SIGCONT)
+
+    /** Timer signal */
+    public val ALRM: Signal = Signal("SIGALRM", platform.posix.SIGALRM)
+
+    /** Bus error (bad memory access) */
+    public val BUS: Signal = Signal("SIGBUS", platform.posix.SIGBUS)
+
+    /** Child stopped or terminated */
+    public val CHLD: Signal = Signal("SIGCHLD", platform.posix.SIGCHLD)
+
+    /** Continue if stopped */
+    public val CONT: Signal = Signal("SIGCONT", platform.posix.SIGCONT)
+
+    /** Erroneous arithmetic operation */
     public actual val FPE: Signal = Signal("SIGFPE", platform.posix.SIGFPE)
-    public actual val HUP: Signal = Signal("SIGHUP", platform.posix.SIGHUP)
+
+    /** Hangup detected on controlling terminal or death of controlling process */
+    public val HUP: Signal = Signal("SIGHUP", platform.posix.SIGHUP)
+
+    /** Illegal instruction */
     public actual val ILL: Signal = Signal("SIGILL", platform.posix.SIGILL)
+
+    /** Interrupt from keyboard */
     public actual val INT: Signal = Signal("SIGINT", platform.posix.SIGINT)
-    public actual val IO: Signal = Signal("SIGIO", platform.posix.SIGIO)
-    public actual val IOT: Signal = Signal("SIGIOT", platform.posix.SIGIOT)
-    public actual val KILL: Signal = Signal("SIGKILL", platform.posix.SIGKILL)
-    public actual val PIPE: Signal = Signal("SIGPIPE", platform.posix.SIGPIPE)
-    public actual val POLL: Signal = Signal("SIGPOLL", platform.posix.SIGPOLL)
-    public actual val PROF: Signal = Signal("SIGPROF", platform.posix.SIGPROF)
-    public actual val PWR: Signal = Signal("SIGPWR", platform.posix.SIGPWR)
-    public actual val QUIT: Signal = Signal("SIGQUIT", platform.posix.SIGQUIT)
+
+    /** I/O now possible */
+    public val IO: Signal = Signal("SIGIO", platform.posix.SIGIO)
+
+    /** IOT trap */
+    public val IOT: Signal = Signal("SIGIOT", platform.posix.SIGIOT)
+
+    /** Kill signal */
+    public val KILL: Signal = Signal("SIGKILL", platform.posix.SIGKILL)
+
+    /** Broken pipe: Write to pipe with no readers */
+    public val PIPE: Signal = Signal("SIGPIPE", platform.posix.SIGPIPE)
+
+    /** Pollable event */
+    public val POLL: Signal = Signal("SIGPOLL", platform.posix.SIGPOLL)
+
+    /** Profiling timer expired */
+    public val PROF: Signal = Signal("SIGPROF", platform.posix.SIGPROF)
+
+    /** Power failure */
+    public val PWR: Signal = Signal("SIGPWR", platform.posix.SIGPWR)
+
+    /** Quit from keyboard */
+    public val QUIT: Signal = Signal("SIGQUIT", platform.posix.SIGQUIT)
+
+    /** Invalid memory reference */
     public actual val SEGV: Signal = Signal("SIGSEGV", platform.posix.SIGSEGV)
-    public actual val STKFLT: Signal = Signal("SIGSTKFLT", platform.posix.SIGSTKFLT)
-    public actual val STOP: Signal = Signal("SIGSTOP", platform.posix.SIGSTOP)
-    public actual val SYS: Signal = Signal("SIGSYS", platform.posix.SIGSYS)
+
+    /** Stack fault on coprocessor (unused) */
+    public val STKFLT: Signal = Signal("SIGSTKFLT", platform.posix.SIGSTKFLT)
+
+    /** Stop process */
+    public val STOP: Signal = Signal("SIGSTOP", platform.posix.SIGSTOP)
+
+    /** Bad system call */
+    public val SYS: Signal = Signal("SIGSYS", platform.posix.SIGSYS)
+
+    /** Termination signal */
     public actual val TERM: Signal = Signal("SIGTERM", platform.posix.SIGTERM)
-    public actual val TRAP: Signal = Signal("SIGTRAP", platform.posix.SIGTRAP)
-    public actual val TSTP: Signal = Signal("SIGTSTP", platform.posix.SIGTSTP)
-    public actual val TTIN: Signal = Signal("SIGTTIN", platform.posix.SIGTTIN)
-    public actual val TTOU: Signal = Signal("SIGTTOU", platform.posix.SIGTTOU)
-    public actual val UNUSED: Signal = Signal("SIGUNUSED", platform.posix.SIGUNUSED)
-    public actual val URG: Signal = Signal("SIGURG", platform.posix.SIGURG)
-    public actual val USR1: Signal = Signal("SIGUSR1", platform.posix.SIGUSR1)
-    public actual val USR2: Signal = Signal("SIGUSR2", platform.posix.SIGUSR2)
-    public actual val VTALRM: Signal = Signal("SIGVTALRM", platform.posix.SIGVTALRM)
-    public actual val WINCH: Signal = Signal("SIGWINCH", platform.posix.SIGWINCH)
-    public actual val XCPU: Signal = Signal("SIGXCPU", platform.posix.SIGXCPU)
-    public actual val XFSZ: Signal = Signal("SIGXFSZ", platform.posix.SIGXFSZ)
+
+    /** Trace/breakpoint trap */
+    public val TRAP: Signal = Signal("SIGTRAP", platform.posix.SIGTRAP)
+
+    /** Stop typed at terminal */
+    public val TSTP: Signal = Signal("SIGTSTP", platform.posix.SIGTSTP)
+
+    /** Terminal input for background process */
+    public val TTIN: Signal = Signal("SIGTTIN", platform.posix.SIGTTIN)
+
+    /** Terminal output for background process */
+    public val TTOU: Signal = Signal("SIGTTOU", platform.posix.SIGTTOU)
+
+    /** Synonymous with [SYS] */
+    public val UNUSED: Signal = Signal("SIGUNUSED", platform.posix.SIGUNUSED)
+
+    /** Urgent condition on socket */
+    public val URG: Signal = Signal("SIGURG", platform.posix.SIGURG)
+
+    /** User-defined signal 1 */
+    public val USR1: Signal = Signal("SIGUSR1", platform.posix.SIGUSR1)
+
+    /** User-defined signal 2 */
+    public val USR2: Signal = Signal("SIGUSR2", platform.posix.SIGUSR2)
+
+    /** Virtual alarm clock */
+    public val VTALRM: Signal = Signal("SIGVTALRM", platform.posix.SIGVTALRM)
+
+    /** Window resize signal */
+    public val WINCH: Signal = Signal("SIGWINCH", platform.posix.SIGWINCH)
+
+    /** CPU time limit exceeded */
+    public val XCPU: Signal = Signal("SIGXCPU", platform.posix.SIGXCPU)
+
+    /** File size limit exceeded */
+    public val XFSZ: Signal = Signal("SIGXFSZ", platform.posix.SIGXFSZ)
+
+    internal actual val Known = listOf(
+        ABRT, ALRM, BUS, CHLD, CONT, FPE, HUP, ILL, INT, IO, IOT, KILL, PIPE, POLL, PROF, PWR, QUIT, SEGV,
+        STKFLT, STOP, SYS, TERM, TRAP, TSTP, TTIN, TTOU, UNUSED, URG, USR1, USR2, VTALRM, WINCH, XCPU, XFSZ
+    )
 }

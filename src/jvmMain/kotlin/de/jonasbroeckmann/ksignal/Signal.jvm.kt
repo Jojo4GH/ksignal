@@ -3,13 +3,18 @@ package de.jonasbroeckmann.ksignal
 import sun.misc.Signal as JavaSignal
 import sun.misc.SignalHandler as JavaSignalHandler
 
+/**
+ * A signal.
+ *
+ * The JVM implementation is based on [sun.misc.Signal].
+ */
 public actual class Signal private constructor(
     internal val java: JavaSignal
 ) {
     /**
      * Creates a signal with the given id.
      *
-     * @param id the signal id (e.g. `"INT"`)
+     * @param id the signal id (e.g. `"QUIT"`)
      *
      * @see [sun.misc.Signal]
      */

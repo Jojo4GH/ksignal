@@ -2,41 +2,34 @@ package de.jonasbroeckmann.ksignal
 
 @Suppress("PropertyName", "VariableNaming")
 public actual abstract class Signals {
+    /** Abnormal termination */
     public actual val ABRT: Signal = Signal("SIGABRT", platform.posix.SIGABRT)
-    public actual val ALRM: Signal = Signal.unsupported("SIGALRM")
-    // TODO rework Signals to only specify supported signals
+
+    /** See [source](https://github.com/mingw-w64/mingw-w64/blob/dc69654d1bc1325626feff3094ecef82d2cc7b2f/mingw-w64-headers/crt/signal.h#L31) */
+    public val ABRT2: Signal = Signal("SIGABRT2", platform.posix.SIGABRT2)
+
+    /** Same meaning as [ABRT]. For compatibility with other platforms. */
+    public val ABRT_COMPAT: Signal = Signal("SIGABRT_COMPAT", platform.posix.SIGABRT_COMPAT)
+
+    /** See [source](https://github.com/mingw-w64/mingw-w64/blob/dc69654d1bc1325626feff3094ecef82d2cc7b2f/mingw-w64-headers/crt/signal.h#L29) */
     public val BREAK: Signal = Signal("SIGBREAK", platform.posix.SIGBREAK)
-    public actual val BUS: Signal = Signal.unsupported("SIGBUS")
-    public actual val CLD: Signal = Signal.unsupported("SIGCLD")
-    public actual val CHLD: Signal = Signal.unsupported("SIGCHLD")
-    public actual val CONT: Signal = Signal.unsupported("SIGCONT")
+
+    /** Floating-point error */
     public actual val FPE: Signal = Signal("SIGFPE", platform.posix.SIGFPE)
-    public actual val HUP: Signal = Signal.unsupported("SIGHUP")
+
+    /** Illegal instruction */
     public actual val ILL: Signal = Signal("SIGILL", platform.posix.SIGILL)
+
+    /** Interrupt from keyboard */
     public actual val INT: Signal = Signal("SIGINT", platform.posix.SIGINT)
-    public actual val IO: Signal = Signal.unsupported("SIGIO")
-    public actual val IOT: Signal = Signal.unsupported("SIGIOT")
-    public actual val KILL: Signal = Signal.unsupported("SIGKILL")
-    public actual val PIPE: Signal = Signal.unsupported("SIGPIPE")
-    public actual val POLL: Signal = Signal.unsupported("SIGPOLL")
-    public actual val PROF: Signal = Signal.unsupported("SIGPROF")
-    public actual val PWR: Signal = Signal.unsupported("SIGPWR")
-    public actual val QUIT: Signal = Signal.unsupported("SIGQUIT")
+
+    /** Illegal storage access */
     public actual val SEGV: Signal = Signal("SIGSEGV", platform.posix.SIGSEGV)
-    public actual val STKFLT: Signal = Signal.unsupported("SIGSTKFLT")
-    public actual val STOP: Signal = Signal.unsupported("SIGSTOP")
-    public actual val SYS: Signal = Signal.unsupported("SIGSYS")
+
+    /** Termination request */
     public actual val TERM: Signal = Signal("SIGTERM", platform.posix.SIGTERM)
-    public actual val TRAP: Signal = Signal.unsupported("SIGTRAP")
-    public actual val TSTP: Signal = Signal.unsupported("SIGTSTP")
-    public actual val TTIN: Signal = Signal.unsupported("SIGTTIN")
-    public actual val TTOU: Signal = Signal.unsupported("SIGTTOU")
-    public actual val UNUSED: Signal = Signal.unsupported("SIGUNUSED")
-    public actual val URG: Signal = Signal.unsupported("SIGURG")
-    public actual val USR1: Signal = Signal.unsupported("SIGUSR1")
-    public actual val USR2: Signal = Signal.unsupported("SIGUSR2")
-    public actual val VTALRM: Signal = Signal.unsupported("SIGVTALRM")
-    public actual val WINCH: Signal = Signal.unsupported("SIGWINCH")
-    public actual val XCPU: Signal = Signal.unsupported("SIGXCPU")
-    public actual val XFSZ: Signal = Signal.unsupported("SIGXFSZ")
+
+    internal actual val Known: List<Signal> = listOf(
+        ABRT, ABRT2, ABRT_COMPAT, BREAK, FPE, ILL, INT, SEGV, TERM
+    )
 }
