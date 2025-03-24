@@ -26,6 +26,7 @@ public expect class Signal {
              * @param action the action to perform when the signal is raised
              * @return the signal handler
              */
+            @Suppress("unused")
             public operator fun invoke(action: (Signal) -> Unit): Handler
         }
     }
