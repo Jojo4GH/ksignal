@@ -73,7 +73,12 @@
 
 A Kotlin Multiplatform library that aggregates platform specific signal handling into a clean common API.
 
-## ⭐️ Supported Targets
+## ⭐️ Main Features
+
+- 🔗 **Unified API**: A single API for handling signals across all supported platforms.
+- 🚩 **Platform Support**: Supports almost all platforms, including JVM and Native platforms.
+- ⭕ **Zero Dependencies**: No external dependencies, just pure Kotlin.
+- 💎 **Idiomatic Kotlin**: Uses Kotlin's language features like lambdas and suspending functions to provide a clean and idiomatic API.
 
 Currently ksignal supports the following targets:
 
@@ -81,10 +86,11 @@ Currently ksignal supports the following targets:
 - `linuxX64`
 - `linuxArm64`
 - `mingwX64`
-- `androidNativeX64`
-- `androidNativeArm64`
-- `androidNativeX86`
-- `androidNativeArm32`
+- Android native
+  - `androidNativeX64`
+  - `androidNativeArm64`
+  - `androidNativeX86`
+  - `androidNativeArm32`
 - Apple targets (untested)
   - `macosX64`
   - `macosArm64`
