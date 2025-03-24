@@ -71,7 +71,7 @@
 [kotlin-native]: https://kotlinlang.org/docs/native-overview.html
 [kotlin-jvm]: https://kotlinlang.org/docs/jvm-get-started.html
 
-A Kotlin Multiplatform library that aggregates platform specific signal handling into a clean common API.
+A Kotlin Multiplatform library that aggregates platform specific system signals (e.g. `SIGINT`, `SIGTERM`, etc.) into a clean common API.
 
 ## ⭐️ Main Features
 
